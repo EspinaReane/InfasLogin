@@ -22,6 +22,11 @@ namespace InfasLogin.Controllers
         [HttpPost]
         public IActionResult Login(User user)
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
             if (user.Username == HardcodedUsername && user.Password == HardcodedPassword)
             {
                 // Set session if login is successful

@@ -27,6 +27,12 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.MapControllerRoute(
+    name: "login",
+    pattern: "Login",
+    defaults: new { controller = "Login", action = "Login" });
+
+
 app.UseHttpsRedirection();
 app.UseRouting();
 

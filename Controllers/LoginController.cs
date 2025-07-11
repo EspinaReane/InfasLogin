@@ -5,12 +5,17 @@ namespace InfasLogin.Controllers
 {
     public class LoginController : Controller
     {
-        // Simulated user credentials (insecure)
         private const string HardcodedUsername = "user";
         private const string HardcodedPassword = "password";
 
         public IActionResult Login()
         {
+            // Check if already logged in
+            if (HttpContext.Session.GetString("Username") != null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             return View();
         }
 
@@ -19,7 +24,7 @@ namespace InfasLogin.Controllers
         {
             if (user.Username == HardcodedUsername && user.Password == HardcodedPassword)
             {
-                // Set session
+                // Set session if login is successful
                 HttpContext.Session.SetString("Username", user.Username);
                 return RedirectToAction("Index", "Home");
             }

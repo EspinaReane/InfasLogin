@@ -15,6 +15,14 @@ namespace InfasLogin.Controllers
 
         public IActionResult Index()
         {
+            // Check if the user is logged in by checking the session
+            if (HttpContext.Session.GetString("Username") == null)
+            {
+                // Redirect to login page if no session is found
+                return RedirectToAction("Login", "Login");
+            }
+
+            // Continue with the usual Home page if the user is logged in
             return View();
         }
 
